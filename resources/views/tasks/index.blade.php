@@ -38,6 +38,19 @@
 
         </x-card>
 
+        {{-- SEARCH --}}
+        <form method="GET" action="{{ route('tasks.index') }}" class="mb-3">
+
+            <input 
+                type="text" 
+                name="search" 
+                class="form-control"
+                placeholder="Cari task..."
+                value="{{ request('search') }}"
+            >
+
+        </form>
+
         {{-- LIST CARD --}}
         <x-card class="task-card">
 
@@ -52,25 +65,31 @@
                     <li class="list-group-item d-flex justify-content-between align-items-center task-item">
 
                         <span>
-                            {{ $item->task }}
+                            @if($item->is_completed)
+                                <del>{{ $item->task }}</del>
+                            @else
+                                {{ $item->task }}
+                            @endif
                         </span>
 
                         <div class="d-flex gap-2">
 
-                        <a href="/tasks/{{ $item->id }}/edit" class="btn btn-warning btn-sm">
-                            Edit
-                        </a>
+                            {{-- EDIT --}}
+                            <a href="/tasks/{{ $item->id }}/edit" class="btn btn-warning btn-sm">
+                                Edit
+                            </a>
 
-                        <form action="/tasks/{{ $item->id }}" method="POST">
-                            @csrf
-                            @method('DELETE')
+                            {{-- DELETE --}}
+                            <form action="/tasks/{{ $item->id }}" method="POST">
+                                @csrf
+                                @method('DELETE')
 
-                            <x-button color="danger" class="btn-sm">
-                                Hapus
-                            </x-button>
-                        </form>
+                                <x-button color="danger" class="btn-sm">
+                                    Hapus
+                                </x-button>
+                            </form>
 
-                    </div>
+                        </div>
 
                     </li>
 
@@ -81,6 +100,11 @@
                 @endforelse
 
             </ul>
+
+            {{-- PAGINATION --}}
+            <div class="mt-3">
+                {{ $todos->links() }}
+            </div>
 
         </x-card>
 

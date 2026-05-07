@@ -7,9 +7,15 @@ use App\Models\Todo;
 
 class TodoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $todos = Todo::where('user_id', auth()->id())->latest()->get();
+        $query = Todo::where('user_id', auth()->id());
+
+        if ($request->search) {
+            $query->where('task', 'like', '%'.$request->search.'%');
+        }
+
+        $todos = $query->latest()->paginate(10);
 
         return view('tasks.index', compact('todos'));
     }
