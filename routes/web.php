@@ -30,17 +30,38 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     /*
-    | TASKS CRUD
+    |-----------------------
+    | TASKS ROUTE
+    |-----------------------
     */
     Route::prefix('tasks')->name('tasks.')->group(function () {
 
-        Route::get('/', [TodoController::class, 'index'])->name('index');        // READ
-        Route::post('/', [TodoController::class, 'store'])->name('store');       // CREATE
+        // LIST + CREATE
+        Route::get('/', [TodoController::class, 'index'])->name('index');
+        Route::post('/', [TodoController::class, 'store'])->name('store');
 
-        Route::get('/{id}', [TodoController::class, 'show'])->name('show');      // DETAIL
-        Route::get('/{id}/edit', [TodoController::class, 'edit'])->name('edit'); // EDIT
-        Route::put('/{id}', [TodoController::class, 'update'])->name('update');  // UPDATE
-        Route::delete('/{id}', [TodoController::class, 'destroy'])->name('destroy'); // DELETE
+        // HISTORY (HARUS DI ATAS biar gak ketabrak {id})
+        Route::get('/history', [TodoController::class, 'history'])->name('history');
+
+        // SHOW DETAIL (HANYA ANGKA BIAR AMAN)
+        Route::get('/{id}', [TodoController::class, 'show'])
+            ->where('id', '[0-9]+')
+            ->name('show');
+
+        // EDIT
+        Route::get('/{id}/edit', [TodoController::class, 'edit'])
+            ->where('id', '[0-9]+')
+            ->name('edit');
+
+        // UPDATE
+        Route::put('/{id}', [TodoController::class, 'update'])
+            ->where('id', '[0-9]+')
+            ->name('update');
+
+        // DELETE
+        Route::delete('/{id}', [TodoController::class, 'destroy'])
+            ->where('id', '[0-9]+')
+            ->name('destroy');
     });
 
     // LOGOUT

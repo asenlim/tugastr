@@ -66,6 +66,27 @@ class TodoController extends Controller
             ->with('success', 'Task diupdate');
     }
 
+    public function history()
+    {
+        $todos = Todo::where('user_id', auth()->id())
+            ->where('is_completed', 1)
+            ->latest()
+            ->get();
+
+        return view('tasks.history', compact('todos'));
+    }
+
+    public function toggle($id)
+    {
+        $todo = Todo::where('user_id', auth()->id())->findOrFail($id);
+
+        $todo->update([
+            'is_completed' => !$todo->is_completed
+        ]);
+
+        return back();
+    }
+
     public function destroy($id)
     {
         Todo::where('user_id', auth()->id())->findOrFail($id)->delete();
