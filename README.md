@@ -31,8 +31,8 @@ Project ini dibuat untuk belajar Laravel dasar sampai menengah (auth + CRUD + re
 - Validasi form
 
 ## Relasi Database
-- User memiliki banyak Todo (hasMany)
-- Todo dimiliki oleh satu User (belongsTo)
+- User memiliki banyak Todo (hasManyy)
+- Todo dimiliki oleh satu User (belongsToo)
 ---
 
 ## Tech Stack
