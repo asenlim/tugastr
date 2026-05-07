@@ -1,0 +1,25 @@
+body {
+    background-color: #f8f9fa;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    min-height: 100vh;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    background: #fff;
+    border-right: 1px solid #dee2e6;
+}
+
+/* Content */
+.content-area {
+    margin-left: 240px;
+    padding: 80px 20px 20px;
+}
+
+/* Navbar tinggi fix */
+.navbar {
+    height: 56px;
+}

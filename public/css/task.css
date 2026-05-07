@@ -1,0 +1,13 @@
+.main-content {
+    margin-left: 260px; /* Jarak dari sidebar */
+    padding-top: 70px;  /* Jarak dari navbar */
+    min-height: 100vh;
+    display: flex;
+    align-items: center; /* Menengahkan secara vertikal */
+    justify-content: center; /* Menengahkan secara horizontal */
+}
+
+.content-wrapper {
+    width: 100%;
+    max-width: 800px; /* Supaya form tidak terlalu lebar ke samping */
+}
