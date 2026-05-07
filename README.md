@@ -30,6 +30,9 @@ Project ini dibuat untuk belajar Laravel dasar sampai menengah (auth + CRUD + re
 - Pagination (10 data per halaman)
 - Validasi form
 
+## Relasi Database
+- User memiliki banyak Todo (hasMany)
+- Todo dimiliki oleh satu User (belongsTo)
 ---
 
 ## Tech Stack
