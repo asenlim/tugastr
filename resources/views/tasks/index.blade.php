@@ -21,7 +21,7 @@
                 Tambah Tugas Baru
             </x-slot:header>
 
-            <form action="/tasks" method="POST">
+            <form action="{{ route('tasks.store') }}" method="POST">
                 @csrf
 
                 <x-input
@@ -74,13 +74,27 @@
 
                         <div class="d-flex gap-2">
 
+                            {{-- TOGGLE SELESAI --}}
+                            <form action="{{ route('tasks.toggle', $item->id) }}" method="POST">
+                                @csrf
+                                @method('PATCH')
+
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    @if($item->is_completed)
+                                        Batalkan
+                                    @else
+                                        Selesai
+                                    @endif
+                                </button>
+                            </form>
+
                             {{-- EDIT --}}
-                            <a href="/tasks/{{ $item->id }}/edit" class="btn btn-warning btn-sm">
+                            <a href="{{ route('tasks.edit', $item->id) }}" class="btn btn-warning btn-sm">
                                 Edit
                             </a>
 
                             {{-- DELETE --}}
-                            <form action="/tasks/{{ $item->id }}" method="POST">
+                            <form action="{{ route('tasks.destroy', $item->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
 

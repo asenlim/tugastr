@@ -36,33 +36,32 @@ Route::middleware('auth')->group(function () {
     */
     Route::prefix('tasks')->name('tasks.')->group(function () {
 
-        // LIST + CREATE
-        Route::get('/', [TodoController::class, 'index'])->name('index');
-        Route::post('/', [TodoController::class, 'store'])->name('store');
+    Route::get('/', [TodoController::class, 'index'])->name('index');
+    Route::post('/', [TodoController::class, 'store'])->name('store');
 
-        // HISTORY (HARUS DI ATAS biar gak ketabrak {id})
-        Route::get('/history', [TodoController::class, 'history'])->name('history');
+    Route::get('/history', [TodoController::class, 'history'])->name('history');
 
-        // SHOW DETAIL (HANYA ANGKA BIAR AMAN)
-        Route::get('/{id}', [TodoController::class, 'show'])
-            ->where('id', '[0-9]+')
-            ->name('show');
+    Route::get('/{id}', [TodoController::class, 'show'])
+        ->where('id', '[0-9]+')
+        ->name('show');
 
-        // EDIT
-        Route::get('/{id}/edit', [TodoController::class, 'edit'])
-            ->where('id', '[0-9]+')
-            ->name('edit');
+    Route::get('/{id}/edit', [TodoController::class, 'edit'])
+        ->where('id', '[0-9]+')
+        ->name('edit');
 
-        // UPDATE
-        Route::put('/{id}', [TodoController::class, 'update'])
-            ->where('id', '[0-9]+')
-            ->name('update');
+    Route::put('/{id}', [TodoController::class, 'update'])
+        ->where('id', '[0-9]+')
+        ->name('update');
 
-        // DELETE
-        Route::delete('/{id}', [TodoController::class, 'destroy'])
-            ->where('id', '[0-9]+')
-            ->name('destroy');
-    });
+    // ✅ INI YANG KAMU LUPA
+    Route::patch('/{id}/toggle', [TodoController::class, 'toggle'])
+        ->where('id', '[0-9]+')
+        ->name('toggle');
+
+    Route::delete('/{id}', [TodoController::class, 'destroy'])
+        ->where('id', '[0-9]+')
+        ->name('destroy');
+});
 
     // LOGOUT
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');

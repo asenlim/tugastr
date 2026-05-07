@@ -9,7 +9,8 @@ class TodoController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Todo::where('user_id', auth()->id());
+        $query = Todo::where('user_id', auth()->id())
+            ->where('is_completed', 0);
 
         if ($request->search) {
             $query->where('task', 'like', '%'.$request->search.'%');
